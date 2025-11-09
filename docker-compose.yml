@@ -1,0 +1,44 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:16
+    container_name: networking_postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: networking
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
+  backend:
+    build: ./backend
+    container_name: networking_backend
+    restart: always
+    environment:
+      - DATABASE_URL=postgresql://admin:admin@postgres:5432/networking
+      - PORT=3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres
+    volumes:
+      - ./backend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
+
+  frontend:
+    build: ./frontend
+    container_name: networking_frontend
+    restart: always
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:3001
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/usr/src/app
+      - /usr/src/app/node_modules
+    command: npm run dev
