@@ -280,7 +280,7 @@ O estado selecionado é salvo no `localStorage`, permitindo alternar a visualiza
 | **Banco**                  | PostgreSQL                         | Modelo relacional, ideal para relacionamentos e queries analíticas futuras.                    |
 | **Infra**                  | Docker Compose                     | Padroniza ambiente local e facilita deploy.                                                    |
 | **Controle de modo Admin** | Alternância via `localStorage`     | Simula permissões sem necessidade de autenticação real, simplificando a navegação e os testes. |
-| **Tokens de convite**      | UUID + expiração simulada          | Garante segurança básica e controle de acesso ao cadastro.                                     |
+| **Tokens de convite**      | UUID                               | Garante segurança básica e controle de acesso ao cadastro.                                     |
 
 ---
 
