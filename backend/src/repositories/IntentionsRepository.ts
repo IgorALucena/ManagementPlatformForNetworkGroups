@@ -39,9 +39,12 @@ export class IntentionsRepository {
   }
 
   async list(): Promise<Intention[]> {
-    const result: QueryResult<Intention> = await pool.query(
-      `SELECT * FROM intentions ORDER BY created_at DESC`
-    );
+    const result = await pool.query(`
+      SELECT i.*, inv.token, inv.used
+      FROM intentions i
+      LEFT JOIN invites inv ON inv.intention_id = i.id
+      ORDER BY i.created_at DESC;
+    `);
     return result.rows;
   }
 }

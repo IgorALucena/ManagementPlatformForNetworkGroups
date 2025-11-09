@@ -11,8 +11,8 @@ router.post(
     [Segments.BODY]: Joi.object().keys({
       full_name: Joi.string().required(),
       email: Joi.string().email().required(),
-      phone: Joi.string().optional(),
-      message: Joi.string().optional(),
+      phone: Joi.string().optional().allow("", null),
+      message: Joi.string().optional().allow("", null),
     }),
   }),
   controller.create.bind(controller)

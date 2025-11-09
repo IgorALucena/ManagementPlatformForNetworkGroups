@@ -6,14 +6,11 @@ describe("👥 Members Module", () => {
   let intentionId: string;
   let validToken: string;
 
-  // Fecha a pool após os testes
   afterAll(async () => {
     await pool.end();
   });
 
-  // Cria uma intenção e aprova para gerar o token antes dos testes
   beforeAll(async () => {
-    // 1️⃣ Cria uma intenção
     const intentionRes = await request(app).post("/api/v1/intentions").send({
       full_name: "João Teste",
       email: "joao.teste@example.com",
@@ -23,7 +20,6 @@ describe("👥 Members Module", () => {
 
     intentionId = intentionRes.body.data.id;
 
-    // 2️⃣ Aprova a intenção para gerar o token
     const approveRes = await request(app).patch(
       `/api/v1/intentions/${intentionId}/approve`
     );

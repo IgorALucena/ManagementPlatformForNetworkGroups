@@ -28,7 +28,6 @@ export class MembersService {
       return { error: "Este convite já foi utilizado", status: 400 };
     }
 
-    // Registra o membro
     const member = await this.membersRepo.create({
       full_name,
       email,
@@ -37,7 +36,6 @@ export class MembersService {
       business_area,
     });
 
-    // Marca o convite como usado
     await this.invitesRepo.markUsed(token);
 
     return { message: "Membro cadastrado com sucesso", data: member };
