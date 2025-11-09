@@ -48,7 +48,7 @@ export default function AdminIntentionsPage() {
       if (token) {
         const registerUrl = `http://localhost:3000/register/${token}`;
         toast.info("Link de cadastro gerado e enviado!");
-        console.log(registerUrl);
+        console.log("Link enviado:", registerUrl);
         await navigator.clipboard.writeText(registerUrl);
       }
 
