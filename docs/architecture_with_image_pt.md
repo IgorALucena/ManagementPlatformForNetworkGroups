@@ -8,7 +8,7 @@
 
 O sistema visa digitalizar a gestão de grupos de networking (semelhantes a grupos de negócios presenciais), permitindo administrar membros, reuniões, indicações e resultados.  
 A solução é composta por **frontend (Next.js)**, **backend (Express + Node.js)** e **banco de dados PostgreSQL**, todos orquestrados via **Docker Compose**.
-
+> O acesso administrativo é simulado diretamente no frontend, sem autenticação real, por meio do botão “Modo Usuário / Modo Admin” no cabeçalho.
 ---
 
 ## 🧱 2. Diagrama da Arquitetura
@@ -141,8 +141,8 @@ frontend/
 
 **Gerenciamento de estado:**
 
-- Context API simples para manter `admin mode` ativo (via variável de ambiente).
-- Hooks (`useState`, `useEffect`, `useFetch`) para dados e requisições.
+- Alternância entre **Modo Usuário** e **Modo Admin** controlada no frontend via `localStorage` (por meio do botão “Modo Usuário / Modo Admin” no cabeçalho).
+- Hooks (`useState`, `useEffect`) utilizados para controle do estado e carregamento de dados.
 
 ---
 
@@ -261,34 +261,26 @@ Cadastra um novo membro com base em token válido.
 
 ---
 
-### 🔹 Admin Verification (simples)
+### 🔹 Alternância de Modo Admin
 
-Será controlado por uma variável de ambiente:
+Não há autenticação real no sistema.  
+A alternância entre **Modo Usuário** e **Modo Admin** é feita diretamente no frontend, através do botão presente no cabeçalho.  
+O estado selecionado é salvo no `localStorage`, permitindo alternar a visualização entre:
 
-```
-ADMIN_SECRET=admin123
-```
-
-Apenas requisições com cabeçalho:
-
-```
-Authorization: Bearer admin123
-```
-
-terão acesso aos endpoints administrativos.
-
+- **Modo Usuário:** acesso ao formulário público de intenção (`/intentions`);
+- **Modo Admin:** acesso ao painel administrativo e dashboard (`/admin/intentions` e `/`).
 ---
 
 ## 🧩 6. Justificativas Técnicas
 
-| Área                   | Decisão                   | Justificativa                                                               |
-| ---------------------- | ------------------------- | --------------------------------------------------------------------------- |
-| **Frontend**           | Next.js                   | SSR e SSG facilitam renderização rápida e SEO, mesmo para páginas públicas. |
-| **Backend**            | Express.js                | Leve, flexível, rápido para prototipar APIs REST e fácil de testar.         |
-| **Banco**              | PostgreSQL                | Modelo relacional, ideal para relacionamentos e queries analíticas futuras. |
-| **Infra**              | Docker Compose            | Padroniza ambiente local e facilita deploy.                                 |
-| **Autenticação admin** | Variável de ambiente      | Simplifica o teste técnico sem construir login real.                        |
-| **Tokens de convite**  | UUID + expiração simulada | Garante segurança básica e controle de acesso ao cadastro.                  |
+| Área                       | Decisão                            | Justificativa                                                                                  |
+| -------------------------- | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
+| **Frontend**               | Next.js                            | SSR e SSG facilitam renderização rápida e SEO, mesmo para páginas públicas.                    |
+| **Backend**                | Express.js                         | Leve, flexível, rápido para prototipar APIs REST e fácil de testar.                            |
+| **Banco**                  | PostgreSQL                         | Modelo relacional, ideal para relacionamentos e queries analíticas futuras.                    |
+| **Infra**                  | Docker Compose                     | Padroniza ambiente local e facilita deploy.                                                    |
+| **Controle de modo Admin** | Alternância via `localStorage`     | Simula permissões sem necessidade de autenticação real, simplificando a navegação e os testes. |
+| **Tokens de convite**      | UUID + expiração simulada          | Garante segurança básica e controle de acesso ao cadastro.                                     |
 
 ---
 
