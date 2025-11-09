@@ -31,6 +31,7 @@ O fluxo principal cobre:
 - Cadastro completo via token;
 - Dashboard de performance com métricas e gráfico.
 
+> O acesso administrativo é simulado diretamente no frontend, por meio de um botão de alternância no cabeçalho (“Modo Usuário / Modo Admin”), sem necessidade de autenticação real.
 ---
 
 ## 🏗 Arquitetura da Solução
@@ -165,12 +166,15 @@ Todos os testes utilizam **Jest** e **React Testing Library**, validando:
 
 ## 💻 Frontend
 
-| Caminho             | Função                   |
-| ------------------- | ------------------------ |
-| `/intentions`       | Formulário público       |
-| `/admin/intentions` | Painel administrativo    |
-| `/register/[token]` | Cadastro via convite     |
-| `/`                 | Dashboard de performance |
+| Caminho             | Função                                    |
+| ------------------- | ----------------------------------------- |
+| `/intentions`       | Formulário público (modo Usuário)         |
+| `/admin/intentions` | Painel administrativo (modo Admin)        |
+| `/register/[token]` | Cadastro via convite                      |
+| `/`                 | Dashboard de performance (modo Admin)     |
+
+🧭 A alternância entre **Modo Usuário** e **Modo Admin** é feita pelo botão presente no cabeçalho (“Modo Usuário / Modo Admin”).  
+O modo selecionado é persistido automaticamente no `localStorage`.
 
 📱 Totalmente responsivo e otimizado para mobile.
 
