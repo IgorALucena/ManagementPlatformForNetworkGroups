@@ -297,11 +297,11 @@ terão acesso aos endpoints administrativos.
 | Etapa | Descrição                                                       | Status           |
 | ----- | --------------------------------------------------------------- | ---------------- |
 | 1     | Documento de Arquitetura                                        | ✅ Concluído     |
-| 2     | Configuração de ambiente (Docker + Express + Next + PostgreSQL) | 🔜 Próximo passo |
-| 3     | Implementar fluxo de admissão de membros                        | ⏳               |
-| 4     | Implementar módulo opcional (Indicações ou Dashboard)           | ⏳               |
-| 5     | Testes (Jest + RTL)                                             | ⏳               |
-| 6     | README e entrega final                                          | ⏳               |
+| 2     | Configuração de ambiente (Docker + Express + Next + PostgreSQL) | ✅ Concluído     |
+| 3     | Implementar fluxo de admissão de membros                        | ✅ Concluído     |
+| 4     | Implementar módulo opcional (Indicações ou Dashboard)           | ✅ Concluído     |
+| 5     | Testes (Jest + RTL)                                             | ✅ Concluído     |
+| 6     | README e entrega final                                          | ✅ Concluído     |
 
 ---
 
